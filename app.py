@@ -305,7 +305,7 @@ def get_secret(key: str, default: str = "") -> str:
 
 
 API_KEY = get_secret("DASHSCOPE_API_KEY")
-MODEL_NAME = get_secret("QWEN_MODEL", "qwen-plus")
+MODEL_NAME = get_secret("QWEN_MODEL", "qwen3.7-plus")
 BASE_URL = get_secret(
     "DASHSCOPE_BASE_URL",
     "https://dashscope.aliyuncs.com/compatible-mode/v1"
@@ -1301,7 +1301,6 @@ with st.sidebar:
     )
 
     filtered = filter_dataset(df, stage, interaction_type, environment, training_focus)
-    st.info(f"📋 当前匹配场景：{len(filtered)} 条")
 
     if st.button("🎲 抽取 / 切换一个训练场景"):
         if filtered.empty:
@@ -1317,8 +1316,7 @@ with st.sidebar:
         st.session_state.last_result = None
         st.rerun()
 
-    st.markdown("### 🤖 今天的练习伙伴")
-    st.code(MODEL_NAME)
+
 
 if "current_case" not in st.session_state:
     st.session_state.current_case = None
